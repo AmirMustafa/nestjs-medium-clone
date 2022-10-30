@@ -4,6 +4,8 @@ import { AppService } from '@app/app.service';
 import { TagModule } from '@app/tag/tag.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Tag } from './tag/tag.entity';
+
 @Module({
   imports: [
     TypeOrmModule.forRootAsync({
@@ -21,7 +23,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: configService.get('USERNAME'),
         password: configService.get('PASSWORD'),
         database: configService.get('DATABASE'),
-        entities: [],
+        entities: [Tag],
+        // entities: [__dirname + '/**/*.entity{.ts,.js}'],
         synchronize: configService.get<boolean>('SYNC'),
       }),
       inject: [ConfigService],
